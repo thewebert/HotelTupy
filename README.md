@@ -12,6 +12,7 @@
 </ul>
 
 <i>Você pode realizar uma função por vez. Quando você escolher um quarto para aplicar melhorias ou estiver satisfeito com o café, você voltará para a função de reservar quartos.</i>
+
 <i>Para escolher o quarto que irá ser reserva ou que irá entrar em processo de aprimoramento, basta clicar no botão do quarto corresponde atrás da mesa do atendente. Um quarto so pode ser reservado se estiver livre e desbloqueado, assim como so poderá aplicar melhorias em quartos livres ou bloqueados.</i>
 
 <h3>Sobre os quartos: </h3>
@@ -39,12 +40,14 @@ Os tipos de hóspedes:
 <li> <b>ESPECIAL</b>: Esses hóspedes são bastantes pacientes, como um REGULAR, e não tem exigências de quarto. Quando chegar a hora de pagar a reservas, eles irão te dar uma gorjeta. A cor da barra de paciência desse hóspede é amarela. </li>
 </ul>
   
-<i>Quando for o primeiro da fila, aparecerá uma mensagem no canto inferior dizendo as informações do hóspede (quantos dias pretende ficar, quanto de dinheiro tem e seu tipo). Teste hospedá-lo de forma que obtenha o melhor dinheiro daquele hóspede. 
-Você pode mandar um hóspede ir embora esperando ele perder a paciência ou clicando no X da sua mensagem de reserva. Os hóspedes pagarão o valor da reserva quando seu reserva vencer. Ou seja, quando desocuparem os quartos.</i>
-
 <h3> Mais sobre o Jogo: </h3>
-<b>Ao lado dos ícones de qual atividade o atendente está fazendo, há uma caixa cinza que informa o dia atual do hotel, a quantidade de dinheiro e uma meta de reserva para aquele dia. Batendo a meta você recebe mais R$ 100,00.
-Inicialmente você terá R$ 700,00 para investir em melhorias no hotel. A simulação tem duração de 5 dias.</b>
+<b>Quando o hóspede foro primeiro da fila, aparecerá uma mensagem no canto inferior dizendo as informações do hóspede (quantos dias pretende ficar, quanto de dinheiro tem e seu tipo). Tente hospedá-lo de forma que obtenha o melhor lucro, sem atrapalhar os futuros hóspedes.</b>
+  
+<b>Você pode mandar um hóspede ir embora esperando ele perder a paciência ou clicando no X da sua mensagem de reserva. Os hóspedes pagarão o valor da reserva quando seu reserva vencer. Ou seja, quando desocuparem os quartos.</b>
+
+<b>Ao lado dos ícones de qual atividade o atendente está fazendo, há uma caixa cinza que informa o dia atual do hotel, a quantidade de dinheiro e uma meta de reserva para aquele dia. Batendo a meta você recebe mais R$ 100,00.</b> <br>
+
+<b>Inicialmente você terá R$ 700,00 para investir em melhorias no hotel. A simulação tem duração de 5 dias.</b>
 
 <i>A confecção dos avatares e alguns itens do cenário são originalmente do jogo Habbo Hotel.</i>
 
