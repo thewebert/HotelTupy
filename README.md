@@ -42,14 +42,15 @@ Os tipos de hóspedes:
 <i>Quando for o primeiro da fila, aparecerá uma mensagem no canto inferior dizendo as informações do hóspede (quantos dias pretende ficar, quanto de dinheiro tem e seu tipo). Teste hospedá-lo de forma que obtenha o melhor dinheiro daquele hóspede. 
 Você pode mandar um hóspede ir embora esperando ele perder a paciência ou clicando no X da sua mensagem de reserva. Os hóspedes pagarão o valor da reserva quando seu reserva vencer. Ou seja, quando desocuparem os quartos.</i>
 
+<h3> Mais sobre o Jogo: </h3>
 <b>Ao lado dos ícones de qual atividade o atendente está fazendo, há uma caixa cinza que informa o dia atual do hotel, a quantidade de dinheiro e uma meta de reserva para aquele dia. Batendo a meta você recebe mais R$ 100,00.
 Inicialmente você terá R$ 700,00 para investir em melhorias no hotel. A simulação tem duração de 5 dias.</b>
 
 <i>A confecção dos avatares e alguns itens do cenário são originalmente do jogo Habbo Hotel.</i>
 
-Membros da equipe:
-<b>João Paulo Mota Santana</b>: Elaboração dos personagens e do cenária e contribuições na documentação do projeto. <b>(2,5/5,0)</b>
-
-<b>Marco Antônio Barreto Dos Santos</b>: Ajuste no código do projeto e confecção do vídeo de apresentação. <b>(2,5/5,0)</b>
-
-<b>Webert Samuel Bezerra Henrique</b>: Contribuições na documentação, desenvolvimento do código do projeto, confecção dos avatares e cenários. <b>(5.0/5.0)</b>
+<h3>Membros da equipe:</h3>
+<ul>
+<li><b>João Paulo Mota Santana</b>: Elaboração dos personagens e do cenária e contribuições na documentação do projeto. <b>(2,5/5,0)</b></li>
+<li><b>Marco Antônio Barreto Dos Santos</b>: Ajuste no código do projeto e confecção do vídeo de apresentação. <b>(2,5/5,0)</b></li>
+<li><b>Webert Samuel Bezerra Henrique</b>: Contribuições na documentação, desenvolvimento do código do projeto, confecção dos avatares e cenários. <b>(5.0/5.0)</b> </li>
+</ul>
