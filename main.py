@@ -17,11 +17,11 @@ class Hotel():
         self._salao.addMesa(); #Esse mêtodo garante que o Atendente sempre ficará atrás da Mesa.
         self._relogio: 'Relogio' = Relogio();
 
-        self._dinheiro: int = 500;
+        self._dinheiro: int = 700;
         self._numDia: int = 0;
         self._quadro: 'Quadro' = Quadro(1, self._dinheiro, 12);
         self._noite: bool = False;
-        self._metas: List[int] = [0, 12, 15, 18, 20, 23]
+        self._metas: List[int] = [0, 12, 15, 18, 20, 23, 0]
         self._numTarefa: int = 1;
         self._reservasCont = 0;
         self._fila: 'FilaNo'|None = None;
@@ -49,10 +49,13 @@ class Hotel():
         if self._fila:
             no: FilaNo|None = self._fila;
             while(no):
-                self._saindo.append(no.hospede);
-                no.hospede.trajeto(Ponto.indoEmbora());
-                no.hospede.saindo();
+                if no.posicao<4:
+                    self._saindo.append(no.hospede);
+                    no.hospede.trajeto(Ponto.indoEmbora());
+                    no.hospede.saindo();
+                else: no.hospede.sumir();
                 no = no.prox;
+        self._fila = None;
         self._saindo.append(self._atendente);
         self._atendente.fimDoTrabalho();
         self._selecao = TipoIcone.RESERVA;
@@ -127,8 +130,8 @@ class Hotel():
             self._reservaMsg.esconder();
 
     def update(self) -> None:
-        if self._numDia==2: 
-            if self._salao.clicou(): exit();
+        if self._numDia==6: 
+            if mouse.is_button_just_down() and self._salao.clicou(): exit();
         
         elif not self._noite:
             respostaRelogio: int = self._relogio.ticTac();
@@ -183,28 +186,24 @@ class Hotel():
                     no = no.prox;
 
             for x in self._saindo: x.saiu();
-        
+
             if self._atendente.atendendo() and mouse.is_button_just_down():
                 if self._fila and self._reservaMsg.clicou():
-                    if self._atendente.exausto(): 
-                        toast('Você precisa beber café!', 3000);
-                        return None;
-                    self._fila.hospede.trajeto(Ponto.indoEmbora());
-                    self._fila.hospede.saindo();
-                    self._saindo.append(self._fila.hospede);
-                    toast("Você não quis atender "+ self._fila.hospede.nome);
-                    self._fila = FilaNo.sairDaFila(self._fila, 1);
-                    self._reservaMsg.esconder();
+                    if self._selecao == TipoIcone.RESERVA:
+                        self._fila.hospede.trajeto(Ponto.indoEmbora());
+                        self._fila.hospede.saindo();
+                        self._saindo.append(self._fila.hospede);
+                        toast("Você não quis atender "+ self._fila.hospede.nome);
+                        self._fila = FilaNo.sairDaFila(self._fila, 1);
+                        self._reservaMsg.esconder();
+                    else: toast("Você não está fazendo reservas agora.");
                 else:
                     escolhido: Quarto|None = None
                     for q in self._quartos:
                         if q.testarClick():
                             escolhido = q;
                             break;
-                    if escolhido: 
-                        if self._atendente.exausto(): 
-                            toast('Você precisa beber café!', 3000);
-                            return None;
+                    if escolhido:
                         if self._selecao == TipoIcone.RESERVA:
                             try:
                                 self._tentarReservar(escolhido)
@@ -221,14 +220,16 @@ class Hotel():
                             except OrcamentoException as oe: toast(str(oe), 3000);
         
         else:
-            if len(self._saindo)!=0: self._aquelesQueSeForam();
+            if len(self._saindo)!=0: 
+                self._aquelesQueSeForam();
             else:
                 self.inaugurarQuartos();
                 self.recolherPagamento();
                 self._amanheceu();
-                if self._numDia == 2: self._salao.telaFinal(self._dinheiro, self._reservasCont);
+                if self._numDia == 6: 
+                    self._salao.telaFinal(self._dinheiro, self._reservasCont);
                 self._noite = False;
-        
+
 
 meuHotel = Hotel();
 meuHotel.comecar();

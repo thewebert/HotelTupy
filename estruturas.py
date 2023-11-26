@@ -203,7 +203,7 @@ class Salao(BaseGroup):
         dinstr: str = "R$ "+str(dinheiro)+",00";
         self._add(Rectangle(280, 175, 400, 200, 'white', 'white'))
         self._add(Label("O Jogo acaba por aqui...", 310, 190, "Candara 25 bold", 'Black', 'nw'));
-        self._add(Label("Você atendeu "+resstr+" Hóspedes ao logo desses 5 Dias.", 290, 250, "Candara 14", 'Black', 'nw'));
+        self._add(Label("Você atendeu "+resstr+" Hóspedes nesses 5 dias.", 290, 250, "Candara 14", 'Black', 'nw'));
         self._add(Label("E o Hotel ficou com "+dinstr+" de renda.", 290, 280, "Candara 14", 'Black', 'nw'));
         self._add(Rectangle(405, 320, 150, 40, 'silver', 'silver'));
         self._add(Label("Fechar o Jogo", 410, 325, "Candara 18 bold", 'Black', 'nw')); 
@@ -374,12 +374,9 @@ class MensagemReserva(BaseGroup):
         self._show()
 
     def clicou(self) -> bool:
-        """Retorna um valor booleano informando se o botão foi clicado ou não.
-        
-        Caso o botão foi clicado, a Mensagem é escondida."""
+        """Retorna um valor booleano informando se o botão foi clicado ou não."""
         if self._vazia: return False;
         if (mouse.x>=697 and mouse.x<=707) and (mouse.y>=433 and mouse.y<=443):
-            self._hide();
             return True;
         return False;
 
@@ -578,18 +575,18 @@ class Quarto():
         q01 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 0, 1, 650, 235);
         q02 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 0, 2, 680, 235);
         q03 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 0, 3, 710, 235);
-        q04 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 0, 4, 740, 235);
-        q05 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 0, 5, 770, 235);
+        q04 = Quarto(TipoQuarto.MASTER, QuartoSituacao.LIVRE, 0, 4, 740, 235);
+        q05 = Quarto(TipoQuarto.MASTER, QuartoSituacao.LIVRE, 0, 5, 770, 235);
         q06 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 0, 6, 800, 235);
         q07 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 0, 7, 830, 235);
         q08 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 0, 8, 860, 235);
 
         q09 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 1, 1, 650, 265);
         q10 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 1, 2, 680, 265);
-        q11 = Quarto(TipoQuarto.MASTER, QuartoSituacao.LIVRE, 1, 3, 710, 265);
+        q11 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 1, 3, 710, 265);
         q12 = Quarto(TipoQuarto.MASTER, QuartoSituacao.LIVRE, 1, 4, 740, 265);
         q13 = Quarto(TipoQuarto.MASTER, QuartoSituacao.LIVRE, 1, 5, 770, 265);
-        q14 = Quarto(TipoQuarto.MASTER, QuartoSituacao.LIVRE, 1, 6, 800, 265);
+        q14 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 1, 6, 800, 265);
         q15 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 1, 7, 830, 265);
         q16 = Quarto(TipoQuarto.SIMPLES, QuartoSituacao.LIVRE, 1, 8, 860, 265);
 
@@ -764,12 +761,17 @@ class Quarto():
 
     def validarResquisitos(self, hospede: Hospede) -> None:
         """Verifica se o Quarto cumpre os resquisitos do Hóspede."""
-        if hospede.tipo == TipoHospede.AVARENTO and (self._tipo != TipoQuarto.SIMPLES or self._andar!=0):
+        if hospede.tipo == TipoHospede.AVARENTO and self._tipo != TipoQuarto.SIMPLES:
             raise RequisitoException(hospede.nome+" não aceita ficar nesse tipo de quarto!");
         elif hospede.tipo == TipoHospede.ORGULHOSO and self._tipo == TipoQuarto.SIMPLES:
             raise RequisitoException(hospede.nome+" não aceita ficar nesse tipo de quarto!");
+        elif hospede.tipo == TipoHospede.IMPACIENTE and self._andar>1:
+            raise RequisitoException(hospede.nome+" não aceita ficar nesse andar!");
+        elif hospede.tipo == TipoHospede.PILANTRA and self._andar<1:
+            raise RequisitoException(hospede.nome+" não aceita ficar nesse andar!");
         elif hospede.carteira < (self._preco*hospede.totalDias):
             raise DinheiroException(hospede.nome+" não possui dinheiro o suficiente!");
+        
 
 class Reserva():
     def __init__(self, diaEntrada: int, quartoPreco: int, hospede: 'Hospede') -> None:

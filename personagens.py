@@ -43,7 +43,7 @@ class TipoHospede(Enum):
       elif tipo==TipoHospede.IMPACIENTE: return "Crimson";
       elif tipo==TipoHospede.AVARENTO: return "Silver";
       elif tipo==TipoHospede.ORGULHOSO: return "Thistle";
-      elif tipo==TipoHospede.PILANTRA: return "Olive";
+      elif tipo==TipoHospede.PILANTRA: return "Sea Green";
       elif tipo==TipoHospede.ESPECIAL: return "Goldenrod";
 
     @staticmethod
@@ -312,6 +312,7 @@ class FilaNo():
             if x.posicao!=posicao:
                 x.posicao = posicao;
                 x.hospede.trajeto(Ponto.andarFila(posicao));
+                x.hospede.enfilerado();
             x = x.prox;
             posicao += 1;
         return no;
@@ -351,7 +352,9 @@ class FilaNo():
             posicao += 1;
             for x in range(1, len(lista)):
                 novoNo: FilaNo = FilaNo(lista[x], posicao);
-                if posicao<4: lista[x].trajeto(Ponto.andarFila(posicao));
+                if posicao<4: 
+                    lista[x].trajeto(Ponto.andarFila(posicao));
+                    lista[x].enfilerado();
                 no.apontePara(novoNo);
                 no = novoNo;
                 posicao += 1;
@@ -366,6 +369,7 @@ class FilaNo():
                 if n.posicao!=posicao and posicao<4:
                     n.posicao = posicao;
                     n.hospede.trajeto(Ponto.andarFila(posicao));
+                    lista[x].enfilerado();
                 ant = n;
                 n = n.prox;
                 posicao+=1;
@@ -664,7 +668,7 @@ class Personagem():
 class Atendente(Personagem):
     def __init__(self) -> None:
         super().__init__('MAIN', Direcao.DIREITA)
-        self._energiaTemp = 30;
+        self._energiaTemp = 24;
         self._andando: bool = False;
         self._situacao: AtendenteSituacao = AtendenteSituacao.CHEGANDO;
         self._avatar: 'PC' = PC(0, 125, super().imagemEstatica);
@@ -675,7 +679,7 @@ class Atendente(Personagem):
             self._frameTemp = 0;
             self._frame = Frame.caminho();
             self._avatar.parandoCafe(self._tag, self._direcao);
-            self._energiaTemp = 30;
+            self._energiaTemp = 24;
 
     def estaTrabalhando(self) -> bool:
         if self._situacao == AtendenteSituacao.ATENDENDO: return True;
@@ -707,7 +711,7 @@ class Atendente(Personagem):
         return self._avatar.cheio();
 
     def beba(self) -> None:
-        self._energiaTemp = 30;
+        self._energiaTemp = 24;
         self._frame = Frame.cafe();
         self._frameTemp = 0;
         self._situacao = AtendenteSituacao.BEBENDO;
@@ -737,7 +741,7 @@ class Atendente(Personagem):
     def update(self) -> None:
         if self._situacao == AtendenteSituacao.ATENDENDO:
             if self._energiaTemp <= 1:
-                self._energiaTemp = 30;
+                self._energiaTemp = 24;
                 if self._avatar.consumirEnergia(): 
                     self._situacao = AtendenteSituacao.EXAUSTO;
                     toast("Você está exautsto", 3000)
@@ -745,7 +749,7 @@ class Atendente(Personagem):
         
         elif self._situacao == AtendenteSituacao.BEBENDO:
             if self._energiaTemp <= 0:
-                self._energiaTemp = 30;
+                self._energiaTemp = 24;
                 self._avatar.bebendoCafe();
                 self._mudandoFrameCafe();
             else: self._energiaTemp -= 3;
@@ -775,7 +779,7 @@ class Hospede(Personagem):
         self._nome: str = nome;
         self._tipo: TipoHospede = tipo;
         self._situacao: 'HospedeSituacao' = HospedeSituacao.FORA;
-        self._pacienciaTemp: int = 25;
+        self._pacienciaTemp: int = 22;
         self._carteira: int = TipoHospede.valorCarteira(tipo, ndias);
         self._totalDias: int = ndias;
         posicao = posicao * 120; #Garantindo que nenhum Avatar fique em cima de outro.
@@ -845,7 +849,7 @@ class Hospede(Personagem):
     def cansou(self) -> bool:
         """Retorna True caso o Hóspede já tenha perdido toda a paciência, False caso contrário."""
         if self._pacienciaTemp<=0:
-            self._pacienciaTemp=25;
+            self._pacienciaTemp=22;
             if self._avatar.consumirPaciencia():
                 self._ponto = Ponto.indoEmbora();
                 self._situacao = HospedeSituacao.SAINDO;
