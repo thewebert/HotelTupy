@@ -23,6 +23,7 @@ class Hotel():
         self._noite: bool = False;
         self._metas: List[int] = [0, 12, 15, 18, 20, 23]
         self._numTarefa: int = 1;
+        self._reservasCont = 0;
         self._fila: 'FilaNo'|None = None;
         self._reservaMsg: MensagemReserva = MensagemReserva()
         self._saindo: List['Personagem'] = [];
@@ -34,7 +35,7 @@ class Hotel():
     def _amanheceu(self) -> None:
         """Inicia o Dia no Hotel."""
         self._numDia += 1;
-        self._relogio.cronograma(Momento.gerarMomentos(self._numDia));
+        self._relogio.cronograma(Momento.gerarMomentos());
         self._atendente.boraTrabalhar();
         self._selecao = TipoIcone.RESERVA;
         self._menu.padrao();
@@ -108,6 +109,7 @@ class Hotel():
             cliente: Hospede = self._fila.hospede;
             q.validarResquisitos(cliente);
             toast(cliente.nome+" se reservou conosco!");
+            self._reservasCont += 1;
             self._fila = FilaNo.sairDaFila(self._fila, 1);
             if not self._quadro.concluida: 
                 self._quadro.atualizeReserva();
@@ -126,9 +128,7 @@ class Hotel():
 
     def update(self) -> None:
         if self._numDia==2: 
-            #toast("Nossa experiência acaba por aqui. Obrigado por jogar.", 5000);
-            fim: Optional[str] = input(prompt="Nossa experiência acaba por aqui. Obrigado por jogar.")
-            exit();
+            if self._salao.clicou(): exit();
         
         elif not self._noite:
             respostaRelogio: int = self._relogio.ticTac();
@@ -226,6 +226,7 @@ class Hotel():
                 self.inaugurarQuartos();
                 self.recolherPagamento();
                 self._amanheceu();
+                if self._numDia == 2: self._salao.telaFinal(self._dinheiro, self._reservasCont);
                 self._noite = False;
         
 

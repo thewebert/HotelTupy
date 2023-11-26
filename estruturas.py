@@ -75,47 +75,21 @@ class Momento():
       return lista[0];
 
     @staticmethod
-    def _primeiroDia() -> 'Momento':
+    def _sequenciaMomento() -> 'Momento':
         """
-        Cria os Momentos das Tarefas do Hotel para o primeiro dia.
+        Cria os Momentos das Tarefas do Hotel.
         Retorno: O primeiro Momento da Sêquencia de Momentos.
         """
         lista: List['Momento'] = [Momento(8, 30), Momento(9, 15), Momento(9, 55), Momento(10, 40), Momento(11, 30), Momento(12, 30)]
         return Momento._ligarMomentos(lista);
 
     @staticmethod
-    def _segundoDia() -> 'Momento':
+    def gerarMomentos() -> 'Momento':
         """
-        Cria os Momentos das Tarefas do Hotel para o segundo dia.
-        Retorno: O primeiro Momento da Sêquencia de Momentos.
-        """
-        lista: List['Momento'] = [Momento(8, 30), Momento(9, 20), Momento(10, 10), Momento(11, 00), Momento(12, 0), Momento(12, 30)]
-        return Momento._ligarMomentos(lista);
-
-    @staticmethod
-    def _terceiroDia() -> 'Momento':
-        """
-        Cria os Momentos das Tarefas do Hotel para o terceiro dia.
-        Retorno: O primeiro Momento da Sêquencia de Momentos.
-        """
-        lista: List['Momento'] = [Momento(8, 30), Momento(8, 40), Momento(9, 25), Momento(10, 00), Momento(11, 0), Momento(12, 30)]
-        return Momento._ligarMomentos(lista);
-
-    @staticmethod
-    def gerarMomentos(dia: int) -> 'Momento':
-        """
-        Parâmetros:
-        dia (int): Dia atual do Hotel.
-
         Retorno:
-        O primeiro Momento da Sêquencia de Momentos para aquele dia.
+        O primeiro Momento da Sêquencia de Momentos..
         """
-        if dia==1: 
-          return Momento._primeiroDia();
-        elif dia==2: 
-          return Momento._segundoDia();
-        else: 
-          return Momento._terceiroDia();
+        return Momento._sequenciaMomento();
 
     def horaCerta(self, h: int, m: int) -> bool:
         if self._hora == h and self._minuto == m:
@@ -222,6 +196,21 @@ class Salao(BaseGroup):
         self._add(BaseImage(file='estruturas/computador.png', x = 540, y = 330));
         self._add(BaseImage(file='estruturas/livros.png', x = 565, y = 380));
         self._add(BaseImage(file='estruturas/chaves.png', x = 680, y = 380));
+
+    def telaFinal(self, dinheiro: int, nReservas: int) -> None:
+        resstr: str = str(nReservas);
+        if nReservas < 10: resstr="0"+resstr;
+        dinstr: str = "R$ "+str(dinheiro)+",00";
+        self._add(Rectangle(280, 175, 400, 200, 'white', 'white'))
+        self._add(Label("O Jogo acaba por aqui...", 310, 190, "Candara 25 bold", 'Black', 'nw'));
+        self._add(Label("Você atendeu "+resstr+" Hóspedes ao logo desses 5 Dias.", 290, 250, "Candara 14", 'Black', 'nw'));
+        self._add(Label("E o Hotel ficou com "+dinstr+" de renda.", 290, 280, "Candara 14", 'Black', 'nw'));
+        self._add(Rectangle(405, 320, 150, 40, 'silver', 'silver'));
+        self._add(Label("Fechar o Jogo", 410, 325, "Candara 18 bold", 'Black', 'nw')); 
+
+    def clicou(self) -> bool:
+        if (mouse.x>=405 and mouse.x<=555) and (mouse.y>=320 and mouse.y<=360): return True;
+        return False;
 
 class Quadro(BaseGroup):
     def __init__(self, dia: int, dinheiro: int, meta: int) -> None:
@@ -488,7 +477,7 @@ class Icone():
         """Altera a Imagem do Ícone."""
         self._botao.file = self._pegarImagem();
     
-    
+
 
     def mudar(self, estado: bool) -> None:
         """Muda a Imagem do Ícone.
