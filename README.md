@@ -50,10 +50,3 @@ Os tipos de hóspedes:
 <b>Inicialmente você terá R$ 700,00 para investir em melhorias no hotel. A simulação tem duração de 5 dias.</b>
 
 <i>A confecção dos avatares e alguns itens do cenário são originalmente do jogo Habbo Hotel.</i>
-
-<h3>Membros da equipe:</h3>
-<ul>
-<li><b>João Paulo Mota Santana</b>: Elaboração dos personagens e do cenária e contribuições na documentação do projeto. <b>(2,5/5,0)</b></li>
-<li><b>Marco Antônio Barreto Dos Santos</b>: Ajuste no código do projeto e confecção do vídeo de apresentação. <b>(2,5/5,0)</b></li>
-<li><b>Webert Samuel Bezerra Henrique</b>: Contribuições na documentação, desenvolvimento do código do projeto, confecção dos avatares e cenários. <b>(5.0/5.0)</b> </li>
-</ul>
